@@ -3,7 +3,6 @@ services:
   - type: web
     name: dayflow-backend
     env: python
-    plan: free
     buildCommand: |
       cd backend
       pip install -r requirements.txt
@@ -30,7 +29,6 @@ services:
   - type: web
     name: dayflow-frontend
     env: static
-    plan: free
     buildCommand: |
       cd frontend
       npm install
