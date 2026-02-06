@@ -1,0 +1,38 @@
+services:
+  # Backend: Django Web Service
+  - type: web
+    name: dayflow-backend
+    env: python
+    plan: free # Explicitly set to free
+    buildCommand: |
+      cd backend
+      pip install -r requirements.txt
+      python manage.py collectstatic --no-input
+      python manage.py migrate
+    startCommand: gunicorn --chdir backend dayflow.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ALLOW_ALL_ORIGINS
+        value: "True"
+
+  # Frontend: Static Site
+  - type: web
+    name: dayflow-frontend
+    env: static
+    plan: free # Explicitly set to free
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+    staticPublishPath: frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

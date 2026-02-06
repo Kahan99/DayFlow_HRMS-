@@ -1,0 +1,23 @@
+﻿# Python
+*.pyc
+__pycache__/
+*.sqlite3
+db.sqlite3
+.venv/
+venv/
+
+# Node
+node_modules/
+package-lock.json
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+.env
+backend/.env
+*.log
+frontend/dist/
+backend/media/
+frontend/package-lock.json
