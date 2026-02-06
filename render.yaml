@@ -43,5 +43,4 @@ databases:
   - name: dayflow-db
     databaseName: dayflow
     user: dayflow
-    plan: free
     ipAllowList: [] # Allow all
